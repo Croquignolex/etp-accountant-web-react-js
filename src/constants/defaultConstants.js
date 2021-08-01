@@ -1,4 +1,4 @@
-export const USER_ROLE = "CONTROLLEUR";
+export const USER_ROLE = "COMPATBLE";
 export const AGENT_SCOPE = "AGENT_SCOPE";
 export const PROFILE_SCOPE = "PROFILE_SCOPE";
 
