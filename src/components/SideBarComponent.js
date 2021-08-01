@@ -17,7 +17,6 @@ function SideBarComponent({user, pathname}) {
     const authorisedMenu = useMemo(() => {
         return [
             buildDashboardMenu(),
-            buildRequestsMenu(),
             buildOperationsMenu(),
             buildRecoveriesMenu(),
             buildCheckoutMenu(),
@@ -120,18 +119,6 @@ function buildDashboardMenu() {
         path: path.DASHBOARD_PAGE_PATH,
         icon: 'fa fa-tachometer-alt',
         sub: []
-    };
-}
-
-// Build requests menu
-function buildRequestsMenu() {
-    return {
-        name: page.REQUESTS,
-        icon: 'fa fa-paste',
-        sub: [
-            {name: page.REQUESTS_FLEETS_PAGE, path: path.REQUESTS_FLEETS_PAGE_PATH},
-            {name: page.REQUESTS_CLEARANCES_PAGE, path: path.REQUESTS_CLEARANCES_PAGE_PATH}
-        ]
     };
 }
 
