@@ -1,14 +1,14 @@
 {
   "name": "mmac",
   "title": "MMAC",
-  "description": "MMAC Overseer",
-  "keywords": ["etp", "mmac", "overseer"],
+  "description": "MMAC Accountant",
+  "keywords": ["etp", "mmac", "accountant"],
   "license": "MIT",
   "author": "Croquignolex",
   "contributors": ["Alex NGOMBOL"],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Croquignolex/etp-overseer-web-react-js.git"
+    "url": "https://github.com/Croquignolex/etp-accountant-web-react-js.git"
   },
   "version": "2.0.0",
   "private": true,
