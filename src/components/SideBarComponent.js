@@ -168,8 +168,6 @@ function buildUsersMenu() {
         name: page.USERS,
         icon: 'fa fa-users',
         sub: [
-            {name: page.ADMINS, path: path.ADMINS_PAGE_PATH},
-            {name: page.OVERSEER, path: path.OVERSEERS_PAGE_PATH},
             {name: page.SUPERVISORS, path: path.SUPERVISORS_PAGE_PATH},
             {name: page.ACCOUNTANTS, path: path.ACCOUNTANTS_PAGE_PATH},
             {name: page.MANAGERS, path: path.MANAGERS_PAGE_PATH},
