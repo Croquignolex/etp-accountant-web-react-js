@@ -24,7 +24,6 @@ function SideBarComponent({user, pathname}) {
             buildUsersMenu(),
             buildSimsMenu(),
             buildCompaniesMenu(),
-            buildZonesMenu(),
             buildVendorsMenu(),
         ];
         // eslint-disable-next-line
@@ -199,16 +198,6 @@ function buildCompaniesMenu() {
         name: page.COMPANIES_PAGE,
         path: path.COMPANIES_PAGE_PATH,
         icon: 'fa fa-university',
-        sub: []
-    };
-}
-
-// Build corporates menu
-function buildZonesMenu() {
-    return {
-        name: page.ZONES_PAGE,
-        path: path.ZONES_PAGE_PATH,
-        icon: 'fa fa-map-marked',
         sub: []
     };
 }
