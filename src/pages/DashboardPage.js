@@ -31,7 +31,6 @@ import {storeAllCompaniesRequestReset} from "../redux/requests/companies/actions
 import {storeAllOperatorsRequestReset} from "../redux/requests/operators/actions";
 import {storeAllOverseersRequestReset} from "../redux/requests/overseers/actions";
 import {COLLECTOR_TYPE, FLEET_TYPE, MASTER_TYPE} from "../constants/typeConstants";
-import DashboardCardComponent from "../components/dashboard/DashboardCardComponent";
 import {storeAllCollectorsRequestReset} from "../redux/requests/collectors/actions";
 import {storeAllSupervisorsRequestReset} from "../redux/requests/supervisors/actions";
 import {storeAllAccountantsRequestReset} from "../redux/requests/accountants/actions";
@@ -39,12 +38,7 @@ import {storeAllAdministratorsRequestReset} from "../redux/requests/administrato
 import DashboardWithOperatorCardComponent from "../components/dashboard/DashboardWithOperatorCardComponent";
 
 // Component
-function DashboardPage({agents, overseers, accountants, settings,
-                           allVendorsRequests, administrators, allOverseersRequests,
-                           supervisors, managers, collectors, companies, sims, zones,
-                           operators, allAgentsRequests, allAdministratorsRequests, dispatch,
-                           allSupervisorsRequests, allManagersRequests, allCollectorsRequests, allAccountantsRequests,
-                           allCompaniesRequests, allSimsRequests, allZonesRequests, allOperatorsRequests, location, vendors}) {
+function DashboardPage({settings, sims, dispatch, allSimsRequests, location}) {
     // Local effects
     useEffect(() => {
         fillDashboardData();
@@ -91,10 +85,6 @@ function DashboardPage({agents, overseers, accountants, settings,
 
     // Data
     const cardsData = settings.cards;
-    const resourcesData = useMemo(() => {
-        return agents.filter(agent => types.RESOURCE_TYPE === agent.reference).length
-        // eslint-disable-next-line
-    }, [agents]);
     const mtnMasterFleetSimsFleetsData = useMemo(() => {
         const data = sims.filter(sim => ((sim.operator.id === '1') && (sim.type.name === MASTER_TYPE)));
         const number = data.length
@@ -277,8 +267,6 @@ function DashboardPage({agents, overseers, accountants, settings,
 // Prop types to ensure destroyed props data type
 DashboardPage.propTypes = {
     sims: PropTypes.array.isRequired,
-    zones: PropTypes.array.isRequired,
-    agents: PropTypes.array.isRequired,
     dispatch: PropTypes.func.isRequired,
     vendors: PropTypes.array.isRequired,
     managers: PropTypes.array.isRequired,
