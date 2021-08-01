@@ -26,6 +26,7 @@ function SideBarComponent({user, pathname}) {
             buildCompaniesMenu(),
             buildZonesMenu(),
             buildVendorsMenu(),
+            buildOperatorsMenu(),
         ];
         // eslint-disable-next-line
     }, [pathname]);
@@ -235,6 +236,16 @@ function buildVendorsMenu() {
         name: page.VENDORS_PAGE,
         path: path.VENDORS_PAGE_PATH,
         icon: 'fa fa-user-ninja',
+        sub: []
+    };
+}
+
+// Build operators menu
+function buildOperatorsMenu() {
+    return {
+        name: page.OPERATORS,
+        path: path.OPERATORS_PAGE_PATH,
+        icon: 'fa fa-globe',
         sub: []
     };
 }
