@@ -24,28 +24,39 @@ function DatePickerComponent({end, start, bigButtons, showStartOnly, handleEnd, 
     // Render
     return (
         <div className="d-flex">
-            <DatePicker selected={start}
-                        maxDate={end}
-                        calendarStartDay={1}
-                        dateFormat="dd/MM/yyyy"
-                        onChange={handleSelectedStartDate}
-                        customInput={<CustomInput isBegin />}
-                        selectsStart
-                        startDate={start}
-                        endDate={end}
-            />
-            {!showStartOnly && (
-                <DatePicker selected={end}
-                            maxDate={new Date()}
+            {showStartOnly ? (
+                <DatePicker selected={start}
+                            maxDate={end}
                             calendarStartDay={1}
                             dateFormat="dd/MM/yyyy"
-                            onChange={handleSelectedEndDate}
-                            customInput={<CustomInput />}
-                            selectsEnd
-                            startDate={start}
-                            minDate={start}
-                            endDate={end}
+                            onChange={handleSelectedStartDate}
+                            customInput={<CustomInput isBegin />}
+                            selectsStart
                 />
+            ) : (
+                <>
+                    <DatePicker selected={start}
+                                maxDate={end}
+                                calendarStartDay={1}
+                                dateFormat="dd/MM/yyyy"
+                                onChange={handleSelectedStartDate}
+                                customInput={<CustomInput isBegin />}
+                                selectsStart
+                                startDate={start}
+                                endDate={end}
+                    />
+                    <DatePicker selected={end}
+                                maxDate={new Date()}
+                                calendarStartDay={1}
+                                dateFormat="dd/MM/yyyy"
+                                onChange={handleSelectedEndDate}
+                                customInput={<CustomInput />}
+                                selectsEnd
+                                startDate={start}
+                                minDate={start}
+                                endDate={end}
+                    />
+                </>
             )}
         </div>
     )
