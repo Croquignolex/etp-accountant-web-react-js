@@ -349,11 +349,11 @@ export function* emitCollectorReportsFetch() {
             };
             const apiResponse = yield call(apiPostRequest, `${api.USER_REPORTS_API_PATH}/${id}`, data);
             // Extract data
-            const transactions = extractCollectorMovementsData(
+            const reports = extractCollectorMovementsData(
                 apiResponse.data.rapports
             );
             // Fire event to redux
-            yield put(storeSetCollectorReportsData({transactions}));
+            yield put(storeSetCollectorReportsData({reports}));
             // Fire event for request
             yield put(storeCollectorReportsRequestSucceed({message: apiResponse.message}));
         } catch (message) {
@@ -373,6 +373,7 @@ function extractCollectorData(apiCollector, apiZone, apiAccount, apiSims, apiCre
         zone: {id: '', name: '', map: ''},
 
         sims: [],
+        reports: [],
         movements: [],
         transactions: [],
     };

@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import PropTypes from "prop-types";
 
+import {dateToString} from "../../functions/generalFunctions";
 import FormModalComponent from "../modals/FormModalComponent";
 import {agentTypeBadgeColor} from "../../functions/typeFunctions";
-import {dateToString, formatNumber} from "../../functions/generalFunctions";
 import ZoneDetailsContainer from "../../containers/zones/ZoneDetailsContainer";
 
 // Component
