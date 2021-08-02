@@ -22,6 +22,7 @@ function CollectorsPage({collectors, collectorsRequests, hasMoreData, page, disp
     const [needle, setNeedle] = useState('');
     // const [blockModal, setBlockModal] = useState({show: false, body: '', id: 0});
     // const [newCollectorModal, setNewCollectorModal] = useState({show: false, header: ''});
+    const [reportsModal, setReportsModal] = useState({show: false, header: '', collector: {}});
     const [movementsModal, setMovementsModal] = useState({show: false, header: '', collector: {}});
     const [transactionsModal, setTransactionsModal] = useState({show: false, header: '', collector: {}});
     const [collectorDetailsModal, setCollectorDetailsModal] = useState({show: false, header: '', id: ''});
@@ -106,6 +107,16 @@ function CollectorsPage({collectors, collectorsRequests, hasMoreData, page, disp
         setMovementsModal({...movementsModal, show: false})
     }
 
+    // Show reports modal form
+    const handleReportsModalShow = (collector) => {
+        setReportsModal({...reportsModal, collector, show: true, header: 'RAPPORT JOURNALIER DE ' + collector.name})
+    }
+
+    // Hide reports modal form
+    const handleReportsModalHide = () => {
+        setReportsModal({...reportsModal, show: false})
+    }
+
     /*// Hide block confirmation modal
     const handleBlockModalHide = () => {
         setBlockModal({...blockModal, show: false})
@@ -148,6 +159,7 @@ function CollectorsPage({collectors, collectorsRequests, hasMoreData, page, disp
                                             {/* Search result & Infinite scroll */}
                                             {(needle !== '' && needle !== undefined)
                                                 ? <CollectorsCardsComponent collectors={searchEngine(collectors, needle)}
+                                                                            handleReportsModalShow={handleReportsModalShow}
                                                                             handleMovementsModalShow={handleMovementsModalShow}
                                                                             handleTransactionsModalShow={handleTransactionsModalShow}
                                                                             handleCollectorDetailsModalShow={handleCollectorDetailsModalShow}
@@ -160,6 +172,7 @@ function CollectorsPage({collectors, collectorsRequests, hasMoreData, page, disp
                                                                         style={{ overflow: 'hidden' }}
                                                         >
                                                             <CollectorsCardsComponent collectors={collectors}
+                                                                                      handleReportsModalShow={handleReportsModalShow}
                                                                                       handleMovementsModalShow={handleMovementsModalShow}
                                                                                       handleTransactionsModalShow={handleTransactionsModalShow}
                                                                                       handleCollectorDetailsModalShow={handleCollectorDetailsModalShow}
@@ -191,6 +204,9 @@ function CollectorsPage({collectors, collectorsRequests, hasMoreData, page, disp
             </FormModalComponent>
             <FormModalComponent modal={transactionsModal} handleClose={handleTransactionsModalHide}>
                 <CollectorTransactionsContainer collector={transactionsModal.collector} />
+            </FormModalComponent>
+            <FormModalComponent modal={reportsModal} handleClose={handleReportsModalHide}>
+                <CollectorTransactionsContainer collector={reportsModal.collector} />
             </FormModalComponent>
         </>
     )

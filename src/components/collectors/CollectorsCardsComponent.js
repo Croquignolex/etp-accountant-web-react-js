@@ -6,7 +6,8 @@ import {dateToString, formatNumber} from "../../functions/generalFunctions";
 import ZoneDetailsContainer from "../../containers/zones/ZoneDetailsContainer";
 
 // Component
-function CollectorsCardsComponent({collectors, handleMovementsModalShow, handleTransactionsModalShow, handleCollectorDetailsModalShow}) {
+function CollectorsCardsComponent({collectors, handleMovementsModalShow, handleTransactionsModalShow,
+                                      handleReportsModalShow, handleCollectorDetailsModalShow}) {
     // Local states
     const [zoneDetailsModal, setZoneDetailsModal] = useState({show: false, header: 'DETAIL DE LA ZONE', id: ''});
 
@@ -92,9 +93,14 @@ function CollectorsCardsComponent({collectors, handleMovementsModalShow, handleT
                                             <i className="fa fa-table" /> Transactions
                                         </button><br/>
                                         <button type="button"
-                                                className="btn btn-sm btn-theme"
+                                                className="btn btn-sm btn-theme mb-1"
                                                 onClick={() => handleMovementsModalShow(item)}>
                                             <i className="fa fa-table" /> Movements caisse
+                                        </button><br/>
+                                        <button type="button"
+                                                className="btn btn-sm btn-theme"
+                                                onClick={() => handleReportsModalShow(item)}>
+                                            <i className="fa fa-table" /> Rapport journalier
                                         </button>
                                     </div>
                                 </div>
@@ -121,6 +127,7 @@ function CollectorsCardsComponent({collectors, handleMovementsModalShow, handleT
 // Prop types to ensure destroyed props data type
 CollectorsCardsComponent.propTypes = {
     collectors: PropTypes.array.isRequired,
+    handleReportsModalShow: PropTypes.func.isRequired,
     handleMovementsModalShow: PropTypes.func.isRequired,
     handleTransactionsModalShow: PropTypes.func.isRequired,
     handleCollectorDetailsModalShow: PropTypes.func.isRequired,
