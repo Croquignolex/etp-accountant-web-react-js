@@ -54,6 +54,11 @@ export const STORE_COLLECTOR_TRANSACTIONS_REQUEST_RESET = 'STORE_COLLECTOR_TRANS
 export const STORE_COLLECTOR_TRANSACTIONS_REQUEST_FAILED = 'STORE_COLLECTOR_TRANSACTIONS_REQUEST_FAILED';
 export const STORE_COLLECTOR_TRANSACTIONS_REQUEST_SUCCEEDED = 'STORE_COLLECTOR_TRANSACTIONS_REQUEST_SUCCEEDED';
 
+export const STORE_COLLECTOR_REPORTS_REQUEST_INIT = 'STORE_COLLECTOR_REPORTS_REQUEST_INIT';
+export const STORE_COLLECTOR_REPORTS_REQUEST_RESET = 'STORE_COLLECTOR_REPORTS_REQUEST_RESET';
+export const STORE_COLLECTOR_REPORTS_REQUEST_FAILED = 'STORE_COLLECTOR_REPORTS_REQUEST_FAILED';
+export const STORE_COLLECTOR_REPORTS_REQUEST_SUCCEEDED = 'STORE_COLLECTOR_REPORTS_REQUEST_SUCCEEDED';
+
 // ======================================================== Collectors
 // Set collectors init data into store
 export const storeCollectorsRequestInit = () => ({
@@ -295,4 +300,26 @@ export const storeCollectorTransactionsRequestSucceed = ({message}) => ({
 // Set collector transactions reset data into store
 export const storeCollectorTransactionsRequestReset = () => ({
     type: STORE_COLLECTOR_TRANSACTIONS_REQUEST_RESET
+});
+// ======================================================== Collector reports
+// Set collector reports init data into store
+export const storeCollectorReportsRequestInit = () => ({
+    type: STORE_COLLECTOR_REPORTS_REQUEST_INIT
+});
+
+// Set collector reports failed data into store
+export const storeCollectorReportsRequestFailed = ({message}) => ({
+    message,
+    type: STORE_COLLECTOR_REPORTS_REQUEST_FAILED
+});
+
+// Set collector reports succeeded data into store
+export const storeCollectorReportsRequestSucceed = ({message}) => ({
+    message,
+    type: STORE_COLLECTOR_REPORTS_REQUEST_SUCCEEDED
+});
+
+// Set collector reports reset data into store
+export const storeCollectorReportsRequestReset = () => ({
+    type: STORE_COLLECTOR_REPORTS_REQUEST_RESET
 });

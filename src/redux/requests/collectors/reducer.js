@@ -14,6 +14,7 @@ const initialState = {
         info: {failed: false, loading: false, succeeded: false, message: ""},
         zone: {failed: false, loading: false, succeeded: false, message: ""},
     },
+    reports: {failed: false, loading: false, succeeded: false, message: ""},
     movements: {failed: false, loading: false, succeeded: false, message: ""},
     transactions: {failed: false, loading: false, succeeded: false, message: ""},
 };
@@ -208,6 +209,23 @@ function reduce(state = initialState, action) {
         // Resolve event to set collector transactions reset request store data
         case actions.STORE_COLLECTOR_TRANSACTIONS_REQUEST_RESET:
             nextState = {...state, transactions: initialState.transactions};
+            return nextState || state;
+        // ======================================================== Collector reports
+        // Resolve event to set collector reports init request store data
+        case actions.STORE_COLLECTOR_REPORTS_REQUEST_INIT:
+            nextState = {...state, reports: requestInitValue()};
+            return nextState || state;
+        // Resolve event to set collector reports failed request store data
+        case actions.STORE_COLLECTOR_REPORTS_REQUEST_FAILED:
+            nextState = {...state, reports: requestFailedValue(action.message)};
+            return nextState || state;
+        // Resolve event to set collector reports succeeded request store data
+        case actions.STORE_COLLECTOR_REPORTS_REQUEST_SUCCEEDED:
+            nextState = {...state, reports: requestSucceededValue(action.message)};
+            return nextState || state;
+        // Resolve event to set collector reports reset request store data
+        case actions.STORE_COLLECTOR_REPORTS_REQUEST_RESET:
+            nextState = {...state, reports: initialState.reports};
             return nextState || state;
         // ========================================================
         // Unknown action
