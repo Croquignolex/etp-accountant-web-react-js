@@ -16,6 +16,7 @@ const initialState = {
         zone: {id: '', name: '', map: ''},
 
         sims: [],
+        reports: [],
         movements: [],
         transactions: [],
     },
@@ -91,6 +92,16 @@ function reduce(state = initialState, action) {
                 current: {
                     ...state.current,
                     transactions: action.transactions
+                }
+            };
+            return nextState || state;
+        // Resolve event to set collector reports action data
+        case actions.STORE_SET_COLLECTOR_REPORTS_DATA:
+            nextState = {
+                ...state,
+                current: {
+                    ...state.current,
+                    reports: action.reports
                 }
             };
             return nextState || state;

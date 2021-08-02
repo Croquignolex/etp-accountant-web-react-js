@@ -5,6 +5,7 @@ export const STORE_SET_NEW_COLLECTOR_DATA = 'STORE_SET_NEW_COLLECTOR_DATA';
 export const STORE_SET_NEXT_COLLECTORS_DATA = 'STORE_SET_NEXT_COLLECTORS_DATA';
 export const STORE_SET_COLLECTOR_ACTION_DATA = 'STORE_SET_COLLECTOR_ACTION_DATA';
 export const STORE_SET_COLLECTOR_TOGGLE_DATA = 'STORE_SET_COLLECTOR_TOGGLE_DATA';
+export const STORE_SET_COLLECTOR_REPORTS_DATA = 'STORE_SET_COLLECTOR_REPORTS_DATA';
 export const STORE_SET_COLLECTOR_MOVEMENTS_DATA = 'STORE_SET_COLLECTOR_MOVEMENTS_DATA';
 export const STORE_SET_COLLECTOR_TRANSACTIONS_DATA = 'STORE_SET_COLLECTOR_TRANSACTIONS_DATA';
 export const STORE_STOP_INFINITE_SCROLL_COLLECTORS_DATA = 'STORE_STOP_INFINITE_SCROLL_COLLECTORS_DATA';
@@ -18,6 +19,7 @@ export const EMIT_NEXT_COLLECTORS_FETCH = 'EMIT_NEXT_SIMS_FETCH';
 export const EMIT_ALL_COLLECTORS_FETCH = 'EMIT_ALL_COLLECTORS_FETCH';
 export const EMIT_UPDATE_COLLECTOR_ZONE = 'EMIT_UPDATE_COLLECTOR_ZONE';
 export const EMIT_UPDATE_COLLECTOR_INFO = 'EMIT_UPDATE_COLLECTOR_INFO';
+export const EMIT_COLLECTOR_REPORTS_FETCH = 'EMIT_COLLECTOR_REPORTS_FETCH';
 export const EMIT_TOGGLE_COLLECTOR_STATUS = 'EMIT_TOGGLE_COLLECTOR_STATUS';
 export const EMIT_COLLECTOR_MOVEMENTS_FETCH = 'EMIT_COLLECTOR_MOVEMENTS_FETCH';
 export const EMIT_COLLECTOR_TRANSACTIONS_FETCH = 'EMIT_COLLECTOR_TRANSACTIONS_FETCH';
@@ -54,6 +56,12 @@ export const storeSetCollectorMovementsData = ({movements}) => ({
 export const storeSetCollectorTransactionsData = ({transactions}) => ({
     transactions,
     type: STORE_SET_COLLECTOR_TRANSACTIONS_DATA
+});
+
+// Set collector reports data in store
+export const storeSetCollectorReportsData = ({reports}) => ({
+    reports,
+    type: STORE_SET_COLLECTOR_REPORTS_DATA
 });
  
 // Set next collectors data in store
@@ -164,4 +172,12 @@ export const emitCollectorTransactionsFetch = ({id, selectedStartDay, selectedEn
     selectedStartDay,
     type: EMIT_COLLECTOR_TRANSACTIONS_FETCH
 });
+
+// Emit fetch collector reports
+export const emitCollectorReportsFetch = ({id, selectedDay}) => ({
+    id,
+    selectedDay,
+    type: EMIT_COLLECTOR_REPORTS_FETCH
+});
+
 

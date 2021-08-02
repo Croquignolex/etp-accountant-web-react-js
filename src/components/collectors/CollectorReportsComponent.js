@@ -8,7 +8,7 @@ import ExcelColumn from "react-data-export/dist/ExcelPlugin/elements/ExcelColumn
 import LoaderComponent from "../LoaderComponent";
 import ErrorAlertComponent from "../ErrorAlertComponent";
 import DatePickerComponent from "../form/DatePickerComponent";
-import {emitCollectorTransactionsFetch} from "../../redux/collectors/actions";
+import {emitCollectorReportsFetch, emitCollectorTransactionsFetch} from "../../redux/collectors/actions";
 import {storeCollectorTransactionsRequestReset} from "../../redux/requests/collectors/actions";
 import {formatString, requestFailed, requestLoading, shortDateToString} from "../../functions/generalFunctions";
 
@@ -40,7 +40,7 @@ function CollectorReportsComponent({collector, transactions, dispatch, request})
     const handleSelectedStartDate = (selectedDay) => {
         shouldResetErrorData();
         setSelectedStartDate(selectedDay)
-        dispatch(emitCollectorTransactionsFetch({
+        dispatch(emitCollectorReportsFetch({
             id: collector.id,
             selectedStartDay: selectedDay,
             selectedEndDay: selectedEndDate
@@ -50,7 +50,7 @@ function CollectorReportsComponent({collector, transactions, dispatch, request})
     const handleSelectedEndDate = (selectedDay) => {
         shouldResetErrorData();
         setSelectedEndDate(selectedDay)
-        dispatch(emitCollectorTransactionsFetch({
+        dispatch(emitCollectorReportsFetch({
             id: collector.id,
             selectedEndDay: selectedDay,
             selectedStartDay: selectedStartDate
