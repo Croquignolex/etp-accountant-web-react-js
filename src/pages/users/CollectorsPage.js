@@ -10,6 +10,7 @@ import TableSearchComponent from "../../components/TableSearchComponent";
 import FormModalComponent from "../../components/modals/FormModalComponent";
 import {emitCollectorsFetch, emitNextCollectorsFetch} from "../../redux/collectors/actions";
 import CollectorsCardsComponent from "../../components/collectors/CollectorsCardsComponent";
+import CollectorReportsContainer from "../../containers/collectors/CollectorReportsContainer";
 import CollectorDetailsContainer from "../../containers/collectors/CollectorDetailsContainer";
 import CollectorMovementsContainer from "../../containers/collectors/CollectorMovementsContainer";
 import CollectorTransactionsContainer from "../../containers/collectors/CollectorTransactionsContainer";
@@ -206,7 +207,7 @@ function CollectorsPage({collectors, collectorsRequests, hasMoreData, page, disp
                 <CollectorTransactionsContainer collector={transactionsModal.collector} />
             </FormModalComponent>
             <FormModalComponent modal={reportsModal} handleClose={handleReportsModalHide}>
-                <CollectorTransactionsContainer collector={reportsModal.collector} />
+                <CollectorReportsContainer collector={reportsModal.collector} />
             </FormModalComponent>
         </>
     )
