@@ -87,9 +87,8 @@ function CollectorReportsComponent({collector, reports, dispatch, request}) {
                                                 <th>DATE</th>
                                                 <th>TYPE</th>
                                                 <th>NATURE</th>
-                                                <th>ENTREES</th>
-                                                <th>SORTIES</th>
-                                                <th>SOLDES</th>
+                                                <th>ACTIFS</th>
+                                                <th>PASSIFS</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -101,11 +100,16 @@ function CollectorReportsComponent({collector, reports, dispatch, request}) {
                                                         <td>{formatString(item.label, 20)}</td>
                                                         <td>{item.in}</td>
                                                         <td>{item.out}</td>
-                                                        <td>{item.balance}</td>
                                                     </tr>
                                                 )
                                             })}
-                                            {reports.length === 0 && (
+                                            {reports.length !== 0 ? (
+                                                <tr>
+                                                    <td colSpan={3}>Total</td>
+                                                    <td>{reports.reduce((acc, val) => acc + parseInt(val.in, 10), 0)}</td>
+                                                    <td>{reports.reduce((acc, val) => acc + parseInt(val.out, 10), 0)}</td>
+                                                </tr>
+                                            ) : (
                                                 <tr>
                                                     <td colSpan={8}>
                                                         <div className='alert custom-active text-center'>
