@@ -8,22 +8,20 @@ import ExcelColumn from "react-data-export/dist/ExcelPlugin/elements/ExcelColumn
 import LoaderComponent from "../LoaderComponent";
 import ErrorAlertComponent from "../ErrorAlertComponent";
 import DatePickerComponent from "../form/DatePickerComponent";
-import {storeCollectorTransactionsRequestReset} from "../../redux/requests/collectors/actions";
-import {emitCollectorReportsFetch, emitCollectorTransactionsFetch} from "../../redux/collectors/actions";
+import {emitCollectorReportsFetch} from "../../redux/collectors/actions";
+import {storeCollectorReportsRequestReset} from "../../redux/requests/collectors/actions";
 import {formatString, requestFailed, requestLoading, shortDateToString} from "../../functions/generalFunctions";
 
 // Component
 function CollectorReportsComponent({collector, reports, dispatch, request}) {
     // Local states
-    const [selectedEndDate, setSelectedEndDate] = useState(new Date());
-    const [selectedStartDate, setSelectedStartDate] = useState(new Date());
+    const [selectedDate, setSelectedDate] = useState(new Date());
 
     // Local effects
     useEffect(() => {
-        dispatch(emitCollectorTransactionsFetch({
+        dispatch(emitCollectorReportsFetch({
             id: collector.id,
-            selectedEndDay: new Date(),
-            selectedStartDay: new Date(),
+            selectedDay: new Date()
         }));
         // Cleaner error alert while component did unmount without store dependency
         return () => {
@@ -34,32 +32,21 @@ function CollectorReportsComponent({collector, reports, dispatch, request}) {
 
     // Reset error alert
     const shouldResetErrorData = () => {
-        dispatch(storeCollectorTransactionsRequestReset());
+        dispatch(storeCollectorReportsRequestReset());
     };
 
-    const handleSelectedStartDate = (selectedDay) => {
+    const handleSelectedDate = (selectedDay) => {
         shouldResetErrorData();
-        setSelectedStartDate(selectedDay)
+        setSelectedDate(selectedDay)
         dispatch(emitCollectorReportsFetch({
             id: collector.id,
-            selectedStartDay: selectedDay,
-            selectedEndDay: selectedEndDate
-        }));
-    }
-
-    const handleSelectedEndDate = (selectedDay) => {
-        shouldResetErrorData();
-        setSelectedEndDate(selectedDay)
-        dispatch(emitCollectorReportsFetch({
-            id: collector.id,
-            selectedEndDay: selectedDay,
-            selectedStartDay: selectedStartDate
+            selectedDay: selectedDay
         }));
     }
 
     // Custom export button
     const ExportButton = () => {
-        const tabName = `Rapport de la journée du ${shortDateToString(selectedStartDate, '-')} de ${collector.name}`;
+        const tabName = `Rapport de la journée du ${shortDateToString(setSelectedDate, '-')} de ${collector.name}`;
 
         return (
             <ExcelFile element={
@@ -88,10 +75,9 @@ function CollectorReportsComponent({collector, reports, dispatch, request}) {
                         <div className="col-lg-12 col-md-12">
                             <ExportButton />
                             <DatePickerComponent
-                                end={selectedEndDate}
-                                start={selectedStartDate}
-                                handleEnd={handleSelectedEndDate}
-                                handleStart={handleSelectedStartDate}
+                                showStartOnly
+                                start={selectedDate}
+                                handleStart={handleSelectedDate}
                             />
                             <div className="card">
                                 <div className="table-responsive">
