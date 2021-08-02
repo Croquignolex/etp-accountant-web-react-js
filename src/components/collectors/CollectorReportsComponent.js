@@ -8,12 +8,12 @@ import ExcelColumn from "react-data-export/dist/ExcelPlugin/elements/ExcelColumn
 import LoaderComponent from "../LoaderComponent";
 import ErrorAlertComponent from "../ErrorAlertComponent";
 import DatePickerComponent from "../form/DatePickerComponent";
-import {emitCollectorReportsFetch, emitCollectorTransactionsFetch} from "../../redux/collectors/actions";
 import {storeCollectorTransactionsRequestReset} from "../../redux/requests/collectors/actions";
+import {emitCollectorReportsFetch, emitCollectorTransactionsFetch} from "../../redux/collectors/actions";
 import {formatString, requestFailed, requestLoading, shortDateToString} from "../../functions/generalFunctions";
 
 // Component
-function CollectorReportsComponent({collector, transactions, dispatch, request}) {
+function CollectorReportsComponent({collector, reports, dispatch, request}) {
     // Local states
     const [selectedEndDate, setSelectedEndDate] = useState(new Date());
     const [selectedStartDate, setSelectedStartDate] = useState(new Date());
@@ -59,7 +59,7 @@ function CollectorReportsComponent({collector, transactions, dispatch, request})
 
     // Custom export button
     const ExportButton = () => {
-        const tabName = `Tansactions de flotte de ${collector.name} du ${shortDateToString(selectedStartDate, '-')} au ${shortDateToString(selectedEndDate, '-')}`;
+        const tabName = `Rapport de la journée du ${shortDateToString(selectedStartDate, '-')} de ${collector.name}`;
 
         return (
             <ExcelFile element={
@@ -67,12 +67,10 @@ function CollectorReportsComponent({collector, transactions, dispatch, request})
                     <i className="fa fa-file-export" /> Exporter sous excel
                 </button>
             } filename={tabName}>
-                <ExcelSheet data={transactions} name="Transactions">
+                <ExcelSheet data={reports} name="Rapport">
                     <ExcelColumn label="DATE" value="creation"/>
-                    <ExcelColumn label="OPERATEUR" value="operator"/>
                     <ExcelColumn label="TYPE" value="type"/>
-                    <ExcelColumn label="COMPTE" value="left_account"/>
-                    <ExcelColumn label="RECIPROQUE" value="right_account"/>
+                    <ExcelColumn label="NATURE" value="label"/>
                     <ExcelColumn label="ENTREES" value="in"/>
                     <ExcelColumn label="SORTIES" value="out"/>
                     <ExcelColumn label="SOLDES" value="balance"/>
@@ -101,35 +99,31 @@ function CollectorReportsComponent({collector, transactions, dispatch, request})
                                         <thead>
                                             <tr>
                                                 <th>DATE</th>
-                                                <th>OPERATEUR</th>
                                                 <th>TYPE</th>
-                                                <th>COMPTE</th>
-                                                <th>RECIPROQUE</th>
+                                                <th>NATURE</th>
                                                 <th>ENTREES</th>
                                                 <th>SORTIES</th>
                                                 <th>SOLDES</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {transactions.map((item, key) => {
+                                            {reports.map((item, key) => {
                                                 return (
                                                     <tr key={key}>
                                                         <td>{item.creation}</td>
-                                                        <td>{item.operator}</td>
                                                         <td>{item.type}</td>
-                                                        <td>{formatString(item.left_account, 20)}</td>
-                                                        <td>{formatString(item.right_account, 20)}</td>
+                                                        <td>{formatString(item.label, 20)}</td>
                                                         <td>{item.in}</td>
                                                         <td>{item.out}</td>
                                                         <td>{item.balance}</td>
                                                     </tr>
                                                 )
                                             })}
-                                            {transactions.length === 0 && (
+                                            {reports.length === 0 && (
                                                 <tr>
                                                     <td colSpan={8}>
                                                         <div className='alert custom-active text-center'>
-                                                            Pas de transactions
+                                                            Pas de mouvements
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -148,10 +142,10 @@ function CollectorReportsComponent({collector, transactions, dispatch, request})
 
 // Prop types to ensure destroyed props data type
 CollectorReportsComponent.propTypes = {
+    reports: PropTypes.array.isRequired,
     dispatch: PropTypes.func.isRequired,
     request: PropTypes.object.isRequired,
     collector: PropTypes.object.isRequired,
-    transactions: PropTypes.array.isRequired,
 };
 
 export default React.memo(CollectorReportsComponent);
