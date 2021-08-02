@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 
 import LoaderComponent from "../LoaderComponent";
 import FormModalComponent from "../modals/FormModalComponent";
-import {dateToString, formatNumber} from "../../functions/generalFunctions";
+import {dateToString} from "../../functions/generalFunctions";
 import AgentDetailsContainer from "../../containers/agents/AgentDetailsContainer";
 
 // Component
@@ -35,10 +35,6 @@ function AgentCardComponent({agent}) {
                 <li className="list-group-item">
                     <b>Zone</b>
                     <span className="float-right">{agent.zone.name}</span>
-                </li>
-                <li className="list-group-item">
-                    <b>Solde total</b>
-                    <span className="float-right text-success text-bold">{formatNumber(agent.account.balance)}</span>
                 </li>
                 <li className="list-group-item">
                     <b>Créer par</b>
