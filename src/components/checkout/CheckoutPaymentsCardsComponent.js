@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from "prop-types";
 
-import {DONE, PROCESSING} from "../../constants/typeConstants";
 import {fleetTypeBadgeColor} from "../../functions/typeFunctions";
+import {CANCEL, DONE, PROCESSING} from "../../constants/typeConstants";
 import {dateToString, formatNumber} from "../../functions/generalFunctions";
 
 // Component
@@ -41,6 +41,7 @@ function CheckoutPaymentsCardsComponent({payments}) {
                                             <span className="float-right">{item.reason}</span>
                                         </li>
                                         <li className="list-group-item">
+                                            {item.status === CANCEL && <b className="text-danger text-bold">Annulé</b>}
                                             {item.status === DONE && <b className="text-success text-bold">Confirmé</b>}
                                             {item.status === PROCESSING && <b className="text-danger text-bold">En attente de confirmation</b>}
                                         </li>
@@ -53,7 +54,7 @@ function CheckoutPaymentsCardsComponent({payments}) {
                 {payments.length === 0 &&
                     <div className="col-12">
                         <div className='alert custom-active text-center'>
-                            Pas d'encaissements internes
+                            Pas de mouvements internes
                         </div>
                     </div>
                 }
