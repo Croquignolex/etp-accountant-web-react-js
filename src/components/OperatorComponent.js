@@ -7,6 +7,7 @@ function OperatorComponent({operator}) {
         case "1": return <img alt="..." src={require('../assets/images/mtn.png')} width={30} />;
         case "3": return <img alt="..." src={require('../assets/images/yup.png')} width={30} />;
         case "2": return <img alt="..." src={require('../assets/images/orange.png')} width={30} />;
+        case "4": return <img alt="..." src={require('../assets/images/yoomee.jpg')} width={30} />;
         default: return <img alt="..." src={require('../assets/images/unknown.png')} width={30} />;
     }
 }
