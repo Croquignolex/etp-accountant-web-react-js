@@ -58,6 +58,7 @@ function CollectorReportsComponent({collector, reports, dispatch, request}) {
                     <ExcelColumn label="DATE" value="creation"/>
                     <ExcelColumn label="TYPE" value="type"/>
                     <ExcelColumn label="NATURE" value="label"/>
+                    <ExcelColumn label="MOTIF" value="reason"/>
                     <ExcelColumn label="ACTIFS" value="in"/>
                     <ExcelColumn label="PASSIFS" value="out"/>
                 </ExcelSheet>
@@ -94,6 +95,7 @@ function CollectorReportsComponent({collector, reports, dispatch, request}) {
                                                 <th>DATE</th>
                                                 <th>TYPE</th>
                                                 <th>NATURE</th>
+                                                <th>MOTIF</th>
                                                 <th>ACTIFS</th>
                                                 <th>PASSIFS</th>
                                             </tr>
@@ -104,7 +106,8 @@ function CollectorReportsComponent({collector, reports, dispatch, request}) {
                                                     <tr key={key}>
                                                         <td>{item.creation}</td>
                                                         <td>{item.type}</td>
-                                                        <td>{formatString(item.label, 20)}</td>
+                                                        <td title={item.label}>{formatString(item.label, 20)}</td>
+                                                        <td title={item.reason}>{formatString(item.reason, 20)}</td>
                                                         <td>{item.in}</td>
                                                         <td>{item.out}</td>
                                                     </tr>
