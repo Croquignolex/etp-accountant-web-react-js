@@ -15,7 +15,6 @@ const initialState = {
         zone: {failed: false, loading: false, succeeded: false, message: ""},
     },
     reports: {failed: false, loading: false, succeeded: false, message: ""},
-    reportGap: {failed: false, loading: false, succeeded: false, message: ""},
     movements: {failed: false, loading: false, succeeded: false, message: ""},
     transactions: {failed: false, loading: false, succeeded: false, message: ""},
 };
@@ -227,23 +226,6 @@ function reduce(state = initialState, action) {
         // Resolve event to set collector reports reset request store data
         case actions.STORE_COLLECTOR_REPORTS_REQUEST_RESET:
             nextState = {...state, reports: initialState.reports};
-            return nextState || state;
-        // ======================================================== Collector report gap
-        // Resolve event to set collector report gap init request store data
-        case actions.STORE_COLLECTOR_REPORT_GAP_REQUEST_INIT:
-            nextState = {...state, reportGap: requestInitValue()};
-            return nextState || state;
-        // Resolve event to set collector report gap failed request store data
-        case actions.STORE_COLLECTOR_REPORT_GAP_REQUEST_FAILED:
-            nextState = {...state, reportGap: requestFailedValue(action.message)};
-            return nextState || state;
-        // Resolve event to set collector report gap succeeded request store data
-        case actions.STORE_COLLECTOR_REPORT_GAP_REQUEST_SUCCEEDED:
-            nextState = {...state, reportGap: requestSucceededValue(action.message)};
-            return nextState || state;
-        // Resolve event to set collector report gap reset request store data
-        case actions.STORE_COLLECTOR_REPORT_GAP_REQUEST_RESET:
-            nextState = {...state, reportGap: initialState.reportGap};
             return nextState || state;
         // ========================================================
         // Unknown action

@@ -13,7 +13,7 @@ import {storeCollectorReportsRequestReset} from "../../redux/requests/collectors
 import {formatString, requestFailed, requestLoading, shortDateToString} from "../../functions/generalFunctions";
 
 // Component
-function CollectorReportsComponent({collector, reports, reportGap, dispatch, request, reportGapRequest}) {
+function CollectorReportsComponent({collector, reports, reportGap, dispatch, request}) {
     // Local states
     const [selectedDate, setSelectedDate] = useState(new Date());
 
@@ -88,9 +88,8 @@ function CollectorReportsComponent({collector, reports, reportGap, dispatch, req
     // Render
     return (
         <>
-            {(requestLoading(request) || requestLoading(reportGapRequest))  ? <LoaderComponent /> : (
+            {(requestLoading(request))  ? <LoaderComponent /> : (
                 requestFailed(request) ? <ErrorAlertComponent message={request.message} /> : (
-                requestFailed(reportGapRequest) ? <ErrorAlertComponent message={reportGapRequest.message} /> : (
                     <div className="row">
                         <div className="col-lg-12 col-md-12">
                             <ExportButton />
@@ -153,7 +152,7 @@ function CollectorReportsComponent({collector, reports, reportGap, dispatch, req
                             </div>
                         </div>
                     </div>
-                ))
+                )
             )}
         </>
     )

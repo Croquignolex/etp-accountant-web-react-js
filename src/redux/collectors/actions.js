@@ -59,11 +59,12 @@ export const storeSetCollectorTransactionsData = ({transactions}) => ({
 });
 
 // Set collector reports data in store
-export const storeSetCollectorReportsData = ({reports}) => ({
+export const storeSetCollectorReportsData = ({reports, reportGap}) => ({
     reports,
+    reportGap,
     type: STORE_SET_COLLECTOR_REPORTS_DATA
 });
- 
+
 // Set next collectors data in store
 export const storeSetNextCollectorsData = ({collectors, hasMoreData, page}) => ({
     page,

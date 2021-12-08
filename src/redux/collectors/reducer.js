@@ -101,7 +101,8 @@ function reduce(state = initialState, action) {
                 ...state,
                 current: {
                     ...state.current,
-                    reports: action.reports
+                    reports: action.reports,
+                    reportGap: action.reportGap,
                 }
             };
             return nextState || state;

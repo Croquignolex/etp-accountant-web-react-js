@@ -352,8 +352,9 @@ export function* emitCollectorReportsFetch() {
             const reports = extractCollectorMovementsData(
                 apiResponse.data.rapports
             );
+            const reportGap = apiResponse.data.ecarts;
             // Fire event to redux
-            yield put(storeSetCollectorReportsData({reports}));
+            yield put(storeSetCollectorReportsData({reports, reportGap}));
             // Fire event for request
             yield put(storeCollectorReportsRequestSucceed({message: apiResponse.message}));
         } catch (message) {
