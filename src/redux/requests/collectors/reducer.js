@@ -15,6 +15,7 @@ const initialState = {
         zone: {failed: false, loading: false, succeeded: false, message: ""},
     },
     reports: {failed: false, loading: false, succeeded: false, message: ""},
+    reportGap: {failed: false, loading: false, succeeded: false, message: ""},
     movements: {failed: false, loading: false, succeeded: false, message: ""},
     transactions: {failed: false, loading: false, succeeded: false, message: ""},
 };

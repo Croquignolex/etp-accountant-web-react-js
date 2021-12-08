@@ -13,7 +13,7 @@ import {storeCollectorReportsRequestReset} from "../../redux/requests/collectors
 import {formatString, requestFailed, requestLoading, shortDateToString} from "../../functions/generalFunctions";
 
 // Component
-function CollectorReportsComponent({collector, reports, dispatch, request}) {
+function CollectorReportsComponent({collector, reports, reportGap, dispatch, request, reportGapRequest}) {
     // Local states
     const [selectedDate, setSelectedDate] = useState(new Date());
 
@@ -35,6 +35,7 @@ function CollectorReportsComponent({collector, reports, dispatch, request}) {
         dispatch(storeCollectorReportsRequestReset());
     };
 
+    // Selected date
     const handleSelectedDate = (selectedDay) => {
         shouldResetErrorData();
         setSelectedDate(selectedDay)
@@ -66,19 +67,30 @@ function CollectorReportsComponent({collector, reports, dispatch, request}) {
         )
     }
 
-    const inReportData = useMemo(() => {
+    const activeReportData = useMemo(() => {
         return reports.reduce((acc, val) => acc + parseInt(val.in, 10), 0);
     }, [reports]);
 
-    const outReportData = useMemo(() => {
+    const passiveReportData = useMemo(() => {
         return reports.reduce((acc, val) => acc + parseInt(val.out, 10), 0);
     }, [reports]);
+
+    const activeReportGap = useMemo(() => {
+        return (reportGap >= 0) ? reportGap : 0;
+    }, [reportGap]);
+
+    const passiveReportGap = useMemo(() => {
+        return (reportGap <= 0) ? (-1) * reportGap : 0;
+    }, [reportGap]);
+
+    const totalClass = ((activeReportData + activeReportGap) === (passiveReportData + passiveReportGap)) ? 'text-success' : 'text-danger';
 
     // Render
     return (
         <>
-            {requestLoading(request)  ? <LoaderComponent /> : (
+            {(requestLoading(request) || requestLoading(reportGapRequest))  ? <LoaderComponent /> : (
                 requestFailed(request) ? <ErrorAlertComponent message={request.message} /> : (
+                requestFailed(reportGapRequest) ? <ErrorAlertComponent message={reportGapRequest.message} /> : (
                     <div className="row">
                         <div className="col-lg-12 col-md-12">
                             <ExportButton />
@@ -114,11 +126,18 @@ function CollectorReportsComponent({collector, reports, dispatch, request}) {
                                                 )
                                             })}
                                             {reports.length !== 0 ? (
-                                                <tr className="text-bold">
-                                                    <td colSpan={3}>Total</td>
-                                                    <td className={`${inReportData === outReportData ? 'text-success' : 'text-danger'}`}>{inReportData}</td>
-                                                    <td className={`${inReportData === outReportData ? 'text-success' : 'text-danger'}`}>{outReportData}</td>
-                                                </tr>
+                                                <>
+                                                    <tr>
+                                                        <td colSpan={4}>Ecart de flottage</td>
+                                                        <td>{activeReportGap}</td>
+                                                        <td>{passiveReportGap}</td>
+                                                    </tr>
+                                                    <tr className="text-bold">
+                                                        <td colSpan={4}>Total</td>
+                                                        <td className={totalClass}>{activeReportData}</td>
+                                                        <td className={totalClass}>{passiveReportData}</td>
+                                                    </tr>
+                                                </>
                                             ) : (
                                                 <tr>
                                                     <td colSpan={8}>
@@ -134,7 +153,7 @@ function CollectorReportsComponent({collector, reports, dispatch, request}) {
                             </div>
                         </div>
                     </div>
-                )
+                ))
             )}
         </>
     )

@@ -9,7 +9,7 @@ const initialState = {
     hasMoreData: false,
 
     current: {
-        id: '', name: '', phone: '', email: '', avatar: '', address: '', creation: '', description: '', debt: 0,
+        id: '', name: '', phone: '', email: '', avatar: '', address: '', creation: '', description: '', debt: 0, reportGap: 0,
 
         creator: {id: '', name: ''},
         account: {id: '', balance: ''},

@@ -6,6 +6,8 @@ import CollectorReportsComponent from "../../components/collectors/CollectorRepo
 const mapStateToProps = (state) => ({
     request: state.collectorsRequests.reports,
     reports: state.collectors.current.reports,
+    reportGap: state.collectors.current.reportGap,
+    reportGapRequest: state.collectorsRequests.reportGap,
 });
 
 // Map dispatch function to component propsS
