@@ -83,7 +83,9 @@ function CollectorReportsComponent({collector, reports, reportGap, dispatch, req
         return (reportGap <= 0) ? (-1) * reportGap : 0;
     }, [reportGap]);
 
-    const totalClass = ((activeReportData + activeReportGap) === (passiveReportData + passiveReportGap)) ? 'text-success' : 'text-danger';
+    const active = (activeReportData + activeReportGap);
+    const passive = (passiveReportData + passiveReportGap);
+    const totalClass = (active === passive) ? 'text-success' : 'text-danger';
 
     // Render
     return (
@@ -133,8 +135,8 @@ function CollectorReportsComponent({collector, reports, reportGap, dispatch, req
                                                     </tr>
                                                     <tr className="text-bold">
                                                         <td colSpan={4}>Total</td>
-                                                        <td className={totalClass}>{activeReportData}</td>
-                                                        <td className={totalClass}>{passiveReportData}</td>
+                                                        <td className={totalClass}>{active}</td>
+                                                        <td className={totalClass}>{passive}</td>
                                                     </tr>
                                                 </>
                                             ) : (
