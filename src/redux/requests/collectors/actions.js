@@ -59,6 +59,11 @@ export const STORE_COLLECTOR_REPORTS_REQUEST_RESET = 'STORE_COLLECTOR_REPORTS_RE
 export const STORE_COLLECTOR_REPORTS_REQUEST_FAILED = 'STORE_COLLECTOR_REPORTS_REQUEST_FAILED';
 export const STORE_COLLECTOR_REPORTS_REQUEST_SUCCEEDED = 'STORE_COLLECTOR_REPORTS_REQUEST_SUCCEEDED';
 
+export const STORE_COLLECTOR_REPORT_GAP_REQUEST_INIT = 'STORE_COLLECTOR_REPORT_GAP_REQUEST_INIT';
+export const STORE_COLLECTOR_REPORT_GAP_REQUEST_RESET = 'STORE_COLLECTOR_REPORT_GAP_REQUEST_RESET';
+export const STORE_COLLECTOR_REPORT_GAP_REQUEST_FAILED = 'STORE_COLLECTOR_REPORT_GAP_REQUEST_FAILED';
+export const STORE_COLLECTOR_REPORT_GAP_REQUEST_SUCCEEDED = 'STORE_COLLECTOR_REPORT_GAP_REQUEST_SUCCEEDED';
+
 // ======================================================== Collectors
 // Set collectors init data into store
 export const storeCollectorsRequestInit = () => ({
@@ -322,4 +327,26 @@ export const storeCollectorReportsRequestSucceed = ({message}) => ({
 // Set collector reports reset data into store
 export const storeCollectorReportsRequestReset = () => ({
     type: STORE_COLLECTOR_REPORTS_REQUEST_RESET
+});
+// ======================================================== Collector report gap
+// Set collector report gap init data into store
+export const storeCollectorReportGapRequestInit = () => ({
+    type: STORE_COLLECTOR_REPORT_GAP_REQUEST_INIT
+});
+
+// Set collector report gap failed data into store
+export const storeCollectorReportGapRequestFailed = ({message}) => ({
+    message,
+    type: STORE_COLLECTOR_REPORT_GAP_REQUEST_FAILED
+});
+
+// Set collector report gap succeeded data into store
+export const storeCollectorReportGapRequestSucceed = ({message}) => ({
+    message,
+    type: STORE_COLLECTOR_REPORT_GAP_REQUEST_SUCCEEDED
+});
+
+// Set collector report gap reset data into store
+export const storeCollectorReportGapRequestReset = () => ({
+    type: STORE_COLLECTOR_REPORT_GAP_REQUEST_RESET
 });
