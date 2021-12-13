@@ -30,43 +30,6 @@ function CollectorReportsComponent({collector, reports, reportGap, dispatch, req
         // eslint-disable-next-line
     }, []);
 
-    // Reset error alert
-    const shouldResetErrorData = () => {
-        dispatch(storeCollectorReportsRequestReset());
-    };
-
-    // Selected date
-    const handleSelectedDate = (selectedDay) => {
-        shouldResetErrorData();
-        setSelectedDate(selectedDay)
-        dispatch(emitCollectorReportsFetch({
-            id: collector.id,
-            selectedDay: selectedDay
-        }));
-    }
-
-    // Custom export button
-    const ExportButton = () => {
-        const tabName = `Rapport de la journée du ${shortDateToString(setSelectedDate, '-')} de ${collector.name}`;
-
-        return (
-            <ExcelFile element={
-                <button type="button" className="btn btn-theme btn-sm mb-1 mr-1">
-                    <i className="fa fa-file-export" /> Exporter sous excel
-                </button>
-            } filename={tabName}>
-                <ExcelSheet data={reports} name="Rapport">
-                    <ExcelColumn label="DATE" value="creation"/>
-                    <ExcelColumn label="TYPE" value="type"/>
-                    <ExcelColumn label="NATURE" value="label"/>
-                    <ExcelColumn label="MOTIF" value="reason"/>
-                    <ExcelColumn label="ACTIFS" value="in"/>
-                    <ExcelColumn label="PASSIFS" value="out"/>
-                </ExcelSheet>
-            </ExcelFile>
-        )
-    }
-
     const activeReportData = useMemo(() => {
         return reports.reduce((acc, val) => acc + parseInt(val.in, 10), 0);
     }, [reports]);
@@ -86,6 +49,52 @@ function CollectorReportsComponent({collector, reports, reportGap, dispatch, req
     const active = (activeReportData + activeReportGap);
     const passive = (passiveReportData + passiveReportGap);
     const totalClass = (active === passive) ? 'text-success' : 'text-danger';
+
+    // Reset error alert
+    const shouldResetErrorData = () => {
+        dispatch(storeCollectorReportsRequestReset());
+    };
+
+    // Selected date
+    const handleSelectedDate = (selectedDay) => {
+        shouldResetErrorData();
+        setSelectedDate(selectedDay)
+        dispatch(emitCollectorReportsFetch({
+            id: collector.id,
+            selectedDay: selectedDay
+        }));
+    }
+
+    // Custom export button
+    const ExportButton = () => {
+        reports.push({
+            creation: "Ecart de flottage",
+            type: "",
+            label: "",
+            reason: "",
+            in: activeReportGap,
+            out: passiveReportGap,
+        })
+
+        const tabName = `Rapport de la journée du ${shortDateToString(setSelectedDate, '-')} de ${collector.name}`;
+
+        return (
+            <ExcelFile element={
+                <button type="button" className="btn btn-theme btn-sm mb-1 mr-1">
+                    <i className="fa fa-file-export" /> Exporter sous excel
+                </button>
+            } filename={tabName}>
+                <ExcelSheet data={reports} name="Rapport">
+                    <ExcelColumn label="DATE" value="creation"/>
+                    <ExcelColumn label="TYPE" value="type"/>
+                    <ExcelColumn label="NATURE" value="label"/>
+                    <ExcelColumn label="MOTIF" value="reason"/>
+                    <ExcelColumn label="ACTIFS" value="in"/>
+                    <ExcelColumn label="PASSIFS" value="out"/>
+                </ExcelSheet>
+            </ExcelFile>
+        )
+    }
 
     // Render
     return (
